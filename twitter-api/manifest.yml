@@ -1,0 +1,7 @@
+applications:
+- path: .
+  memory: 256M
+  instances: 1
+  name: lb-sinnix
+  disk_quota: 512M
+no_ssl: true
