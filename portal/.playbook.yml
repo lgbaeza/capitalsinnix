@@ -1,0 +1,13 @@
+# Publish this application to bluemix using ansible
+---
+- name: Publish the app to Bluemix
+  hosts: localhost
+  connection: local
+  vars:
+    pipeline_id: "{{ lookup('env','PIPELINE_ID') | default('test-php-sample-1',true) }}"
+    app_hostname: "{{ lookup('env','APP_HOSTNAME') | default(pipeline_id,true) }}"
+  tasks:
+    - debug:
+        var: app_hostname
+    - name: CF Push Application
+      shell: "cf push -f manifest.yml -u none --hostname {{ app_hostname }}"
